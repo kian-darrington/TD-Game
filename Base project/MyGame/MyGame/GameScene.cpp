@@ -8,7 +8,7 @@ const int vright = 0, vdown = 1, vleft = 2, vup = 3, right = 4, down = 5, left =
 GameScene::GameScene() {
 	sf::Vector2f pos;
 	setLevelOne();
-	pos.x = 32;
+	pos.x = 0;
 	pos.y = GAME.getRenderWindow().getSize().y / 2 - 5;
 	EnemyPtr enemy1 = std::make_shared<Enemy>(pos);
 	addGameObject(enemy1);
@@ -53,9 +53,13 @@ void GameScene::setLevelOne() {
 
 	//visible path
 	pos.x = 0;
-	pos.y = GAME.getRenderWindow().getSize().y / 2;
+	pos.y = GAME.getRenderWindow().getSize().y / 2 - 23;
 	LinePtr vfirstLine = std::make_shared<Line>(vright, pos);
 	addGameObject(vfirstLine);
+	pos.x = 20;
+	pos.y = GAME.getRenderWindow().getSize().y / 2 - 23;
+	LinePtr filler1 = std::make_shared<Line>(vright, pos);
+	addGameObject(filler1);
 	pos.x = 240;
 	pos.y = (GAME.getRenderWindow().getSize().y / 2) - 300;
 	LinePtr vsecondLine = std::make_shared<Line>(vup, pos);
@@ -64,11 +68,15 @@ void GameScene::setLevelOne() {
 	pos.y = (GAME.getRenderWindow().getSize().y / 2) - 310;
 	LinePtr vthirdLine = std::make_shared<Line>(vright, pos);
 	addGameObject(vthirdLine);
-	pos.x = 530;
+	pos.x = 320;
+	pos.y = (GAME.getRenderWindow().getSize().y / 2) - 310;
+	LinePtr filler2 = std::make_shared<Line>(vright, pos);
+	addGameObject(filler2);
+	pos.x = 540;
 	pos.y = (GAME.getRenderWindow().getSize().y / 2) - 300;
 	LinePtr vfourthLine = std::make_shared<Line>(vdown, pos);
 	addGameObject(vfourthLine);
-	pos.x = 530;
+	pos.x = 540;
 	pos.y = (GAME.getRenderWindow().getSize().y / 2);
 	LinePtr vfifthLine = std::make_shared<Line>(vdown, pos);
 	addGameObject(vfifthLine);
@@ -76,6 +84,10 @@ void GameScene::setLevelOne() {
 	pos.y = (GAME.getRenderWindow().getSize().y / 2) + 240;
 	LinePtr vsixthLine = std::make_shared<Line>(vright, pos);
 	addGameObject(vsixthLine);
+	pos.x = 620;
+	pos.y = (GAME.getRenderWindow().getSize().y / 2) + 240;
+	LinePtr filler3 = std::make_shared<Line>(vright, pos);
+	addGameObject(filler3);
 	pos.x = 840;
 	pos.y = (GAME.getRenderWindow().getSize().y / 2) - 10;
 	LinePtr vLine7 = std::make_shared<Line>(vup, pos);

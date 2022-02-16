@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-const float SPEED = 0.2f;
+const float SPEED = 0.05f;
 
 Enemy::Enemy(sf::Vector2f pos) {
 	sprite_.setTexture(GAME.getTexture("Resources/meteor.png"));
