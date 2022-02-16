@@ -19,10 +19,6 @@ void GameScene::setLevelOne() {
 	pos.y = GAME.getRenderWindow().getSize().y / 2;
 	LinePtr firstLine = std::make_shared<Line>(right, pos);
 	addGameObject(firstLine);
-	pos.x = 400;
-	pos.y = GAME.getRenderWindow().getSize().y / 2;
-	LinePtr firstcorner = std::make_shared<Line>(corner, pos);
-	addGameObject(firstcorner);
 	pos.x = 300;
 	pos.y = (GAME.getRenderWindow().getSize().y / 2) - 300;
 	LinePtr secondLine = std::make_shared<Line>(up, pos);
