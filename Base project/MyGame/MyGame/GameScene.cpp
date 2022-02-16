@@ -2,7 +2,7 @@
 #include "Line.h"
 #include "Enemy.h"
 
-const int right = 0, down = 1, left = 2, up = 3, corner = 4;
+const int vright = 0, vdown = 1, vleft = 2, vup = 3, right = 4, down = 5, left = 6, up = 7;
 
 GameScene::GameScene() {
 	sf::Vector2f pos;
