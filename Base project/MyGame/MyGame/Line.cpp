@@ -3,26 +3,22 @@
 Line::Line(int type, sf::Vector2f pos) {
 	if (type == 0) {
 		sprite_.setTexture(GAME.getTexture("Resources/visible-horizontal-line.png"));
-		assignTag("right");
 	}
 	else if (type == 1) {
 		sprite_.setTexture(GAME.getTexture("Resources/visible-vertical-line.png"));
-		assignTag("down");
 	}
 	else if (type == 2) {
 		sprite_.setTexture(GAME.getTexture("Resources/visible-horizontal-line.png"));
-		assignTag("left");
 	}
 	else if (type == 3) {
 		sprite_.setTexture(GAME.getTexture("Resources/visible-vertical-line.png"));
-		assignTag("up");
 	}
 	else if (type == 4) {
 		sprite_.setTexture(GAME.getTexture("Resources/horizontal-line.png"));
 		assignTag("right");
 	}
 	else if (type == 5){
-		sprite_.setTexture(GAME.getTexture("Resources/horizontal-line.png"));
+		sprite_.setTexture(GAME.getTexture("Resources/vertical-line.png"));
 		assignTag("down");
 	}
 	else if (type == 6) {
@@ -30,7 +26,7 @@ Line::Line(int type, sf::Vector2f pos) {
 		assignTag("left");
 	}
 	else if (type == 7) {
-		sprite_.setTexture(GAME.getTexture("Resources/horizontal-line.png"));
+		sprite_.setTexture(GAME.getTexture("Resources/vertical-line.png"));
 		assignTag("up");
 	}
 	sprite_.setPosition(pos);

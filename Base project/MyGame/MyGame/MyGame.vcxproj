@@ -90,6 +90,7 @@
     <ClCompile Include="MyGame.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Background.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\AnimatedSprite.h" />
@@ -99,6 +100,7 @@
     <ClInclude Include="Engine\Scene.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Line.h" />
   </ItemGroup>
   <ItemGroup>

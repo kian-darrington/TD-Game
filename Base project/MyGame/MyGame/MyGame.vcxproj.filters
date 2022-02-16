@@ -17,6 +17,7 @@
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Background.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\AnimatedSprite.h">
@@ -37,6 +38,7 @@
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Background.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
