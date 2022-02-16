@@ -88,6 +88,8 @@
     <ClCompile Include="Engine\Scene.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="MyGame.cpp" />
+    <ClCompile Include="Line.cpp" />
+    <ClCompile Include="Enemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\AnimatedSprite.h" />
@@ -96,9 +98,17 @@
     <ClInclude Include="Engine\GameObject.h" />
     <ClInclude Include="Engine\Scene.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Line.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="horizontal-line.png" />
+    <Image Include="visible-horizontal-line.png" />
+    <Image Include="vertical-line.png" />
+    <Image Include="visible-vertical-line.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
