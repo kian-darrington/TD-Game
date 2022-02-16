@@ -10,9 +10,11 @@ public:
 	void handleCollision(GameObject& otherGameObject);
 private:
 	sf::Sprite sprite_;
-	int xSpeed_ = 0;
-	int ySpeed_ = -0.02f;
+	int xSpeed_ = 0.2f;
+	int ySpeed_ = 0;
 	int enemyType_;
+	bool collision = false;
+	int direction_ = 0;
 };
 
 typedef std::shared_ptr<Enemy> EnemyPtr;

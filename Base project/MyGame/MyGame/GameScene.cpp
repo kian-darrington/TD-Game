@@ -2,13 +2,13 @@
 #include "Line.h"
 #include "Enemy.h"
 
-const int right = 0, down = 1, left = 2, up = 3;
+const int right = 0, down = 1, left = 2, up = 3, corner = 4;
 
 GameScene::GameScene() {
 	sf::Vector2f pos;
 	setLevelOne();
-	pos.x = 100;//32;
-	pos.y = 100;//GAME.getRenderWindow().getSize().y;
+	pos.x = 32;
+	pos.y = GAME.getRenderWindow().getSize().y / 2 - 5;
 	EnemyPtr enemy1 = std::make_shared<Enemy>(pos);
 	addGameObject(enemy1);
 }
@@ -19,6 +19,10 @@ void GameScene::setLevelOne() {
 	pos.y = GAME.getRenderWindow().getSize().y / 2;
 	LinePtr firstLine = std::make_shared<Line>(right, pos);
 	addGameObject(firstLine);
+	pos.x = 400;
+	pos.y = GAME.getRenderWindow().getSize().y / 2;
+	LinePtr firstcorner = std::make_shared<Line>(corner, pos);
+	addGameObject(firstcorner);
 	pos.x = 300;
 	pos.y = (GAME.getRenderWindow().getSize().y / 2) - 300;
 	LinePtr secondLine = std::make_shared<Line>(up, pos);

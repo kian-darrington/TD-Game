@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-const int SPEED = 0.02f;
+const float SPEED = 0.2f;
 
 Enemy::Enemy(sf::Vector2f pos) {
 	sprite_.setTexture(GAME.getTexture("Resources/meteor.png"));
@@ -15,11 +15,32 @@ void Enemy::draw() {
 
 void Enemy::update(sf::Time& elapsed) {
 	sf::Vector2f pos = sprite_.getPosition();
-	float x = pos.x, y = pos.y;
+	float x = pos.x;
+	float y = pos.y;
 	int msElapsed = elapsed.asMilliseconds();
-	x += xSpeed_ * msElapsed;
-	y += ySpeed_ * msElapsed;
-	sprite_.setPosition(sf::Vector2f(x, y));
+	if (x > GAME.getRenderWindow().getSize().x) {
+		makeDead();
+	}
+	else if (!collision){
+		x += 0.2f * msElapsed;
+		y += 0.2f * msElapsed;
+		sprite_.setPosition(sf::Vector2f(x, y));
+	}
+	if (collision) {
+		if (direction_ == 0) {
+			x += SPEED * msElapsed;
+		}
+		else if (direction_ == 3) {
+			y += SPEED * msElapsed;
+		}
+		else if (direction_ == 1) {
+			x -= SPEED * msElapsed;
+		}
+		else if (direction_ == 2) {
+			y -= SPEED * msElapsed;
+		}
+		sprite_.setPosition(sf::Vector2f(x, y));
+	}
 }
 
 sf::FloatRect Enemy::getCollisionRect() {
@@ -27,20 +48,17 @@ sf::FloatRect Enemy::getCollisionRect() {
 }
 
 void Enemy::handleCollision(GameObject& otherGameObject) {
+	collision = true;
 	if (otherGameObject.hasTag("right")) {
-		xSpeed_ = SPEED;
-		ySpeed_ = 0;
+		direction_ = 0;
 	}
 	if (otherGameObject.hasTag("left")) {
-		xSpeed_ = -SPEED;
-		ySpeed_ = 0;
+		direction_ = 1;
 	}
 	if (otherGameObject.hasTag("up")) {
-		xSpeed_ = 0;
-		ySpeed_ = -SPEED;
+		direction_ = 2;
 	}
 	if (otherGameObject.hasTag("down")) {
-		xSpeed_ = 0;
-		ySpeed_ = SPEED;
+		direction_ = 3;
 	}
 }
