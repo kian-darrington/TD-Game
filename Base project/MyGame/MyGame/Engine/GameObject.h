@@ -32,6 +32,9 @@ public:
 	// This function lets you specify a rectangle for collision checks.
 	virtual sf::FloatRect getCollisionRect() { return sf::FloatRect(); }
 
+	// Allows other game objects to find positions
+	virtual sf::Vector2f getObjectPosition() { return sf::Vector2f(); }
+
 	// Use this to specify what happens when this object collides with another object.
 	virtual void handleCollision(GameObject& otherGameObject) {}
 

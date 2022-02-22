@@ -7,6 +7,7 @@ public:
 	void draw();
 	void update(sf::Time& elapsed);
 	sf::FloatRect getCollisionRect();
+	sf::Vector2f getObjectPosition();
 	void handleCollision(GameObject& otherGameObject);
 private:
 	sf::Sprite sprite_;

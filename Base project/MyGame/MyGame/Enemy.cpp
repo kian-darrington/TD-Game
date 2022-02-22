@@ -47,6 +47,10 @@ sf::FloatRect Enemy::getCollisionRect() {
 	return sprite_.getGlobalBounds();
 }
 
+sf::Vector2f Enemy::getObjectPosition() {
+	return sprite_.getPosition();
+}
+
 void Enemy::handleCollision(GameObject& otherGameObject) {
 	collision = true;
 	if (otherGameObject.hasTag("right")) {
