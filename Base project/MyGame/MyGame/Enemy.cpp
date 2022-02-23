@@ -2,11 +2,31 @@
 
 const float SPEED = 0.05f;
 
-Enemy::Enemy(sf::Vector2f pos) {
-	sprite_.setTexture(GAME.getTexture("Resources/meteor.png"));
+Enemy::Enemy(sf::Vector2f pos, int layer) {
+	layer_ = layer;
+	layerCheck();
 	sprite_.setPosition(pos);
 	setCollisionCheckEnabled(true);
 	assignTag("enemy");
+}
+
+void Enemy::layerCheck() {
+	if (layer_ == 1) {
+		sprite_.setTexture(GAME.getTexture("Resources/meteor.png"));
+	}
+	else if (layer_ == 2) {
+		sprite_.setTexture(GAME.getTexture("Resources/cake.png"));
+		speedBoost = 1.5f;
+	}
+}
+
+void Enemy::speedCheck() {
+	if (layer_ == 1) {
+		speedBoost = 1.0f;
+	}
+	else if (layer_ == 2) {
+		speedBoost = 1.5f;
+	}
 }
 
 void Enemy::draw() {
@@ -28,16 +48,16 @@ void Enemy::update(sf::Time& elapsed) {
 	}
 	if (collision) {
 		if (direction_ == 0) {
-			x += SPEED * msElapsed;
+			x += SPEED * msElapsed * speedBoost;
 		}
 		else if (direction_ == 3) {
-			y += SPEED * msElapsed;
+			y += SPEED * msElapsed * speedBoost;
 		}
 		else if (direction_ == 1) {
-			x -= SPEED * msElapsed;
+			x -= SPEED * msElapsed * speedBoost;
 		}
 		else if (direction_ == 2) {
-			y -= SPEED * msElapsed;
+			y -= SPEED * msElapsed * speedBoost;
 		}
 		sprite_.setPosition(sf::Vector2f(x, y));
 	}
@@ -48,7 +68,7 @@ sf::FloatRect Enemy::getCollisionRect() {
 }
 
 sf::Vector2f Enemy::getObjectPosition() {
-	return sprite_.getPosition();
+	return sf::Vector2f(sprite_.getPosition().x + sprite_.getGlobalBounds().width / 2, sprite_.getPosition().y + sprite_.getGlobalBounds().height / 2);
 }
 
 void Enemy::handleCollision(GameObject& otherGameObject) {
@@ -64,5 +84,12 @@ void Enemy::handleCollision(GameObject& otherGameObject) {
 	}
 	if (otherGameObject.hasTag("down")) {
 		direction_ = 3;
+	}
+	if (otherGameObject.hasTag("projectile")) {
+		layer_--;
+		if (layer_ < 1) {
+			makeDead();
+		}
+		speedCheck();
 	}
 }

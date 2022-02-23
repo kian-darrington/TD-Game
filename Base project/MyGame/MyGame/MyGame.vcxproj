@@ -91,6 +91,7 @@
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Tower.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +103,7 @@
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="Tower.h" />
     <ClInclude Include="Line.h" />
   </ItemGroup>

@@ -2,6 +2,7 @@
 #include "Line.h"
 #include "Enemy.h"
 #include "Background.h"
+#include "Tower.h"
 
 const int vright = 0, vdown = 1, vleft = 2, vup = 3, right = 4, down = 5, left = 6, up = 7;
 
@@ -10,8 +11,10 @@ GameScene::GameScene() {
 	setLevelOne();
 	pos.x = 0;
 	pos.y = GAME.getRenderWindow().getSize().y / 2 - 5;
-	EnemyPtr enemy1 = std::make_shared<Enemy>(pos);
+	EnemyPtr enemy1 = std::make_shared<Enemy>(pos, 2);
 	addGameObject(enemy1);
+	TowerPtr tower = std::make_shared<Tower>(sf::Vector2f(350.0, 150.0));
+	addGameObject(tower);
 }
 
 void GameScene::setLevelOne() {
