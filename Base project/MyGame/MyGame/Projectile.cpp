@@ -2,7 +2,7 @@
 
 const float BASE_SPEED = 0.5f;
 
-Projectile::Projectile(sf::Vector2f pos, sf::Vector2f ePos, float xSpeed, float ySpeed) {
+Projectile::Projectile(sf::Vector2f pos, sf::Vector2f ePos, float xSpeed, float ySpeed, int power) {
 	sprite_.setTexture(GAME.getTexture("Resources/spoon.png"));
 	sprite_.setPosition(pos);
 	assignTag("projectile");
@@ -19,7 +19,7 @@ Projectile::Projectile(sf::Vector2f pos, sf::Vector2f ePos, float xSpeed, float 
 		xSpeed_ = xSpeed / ySpeed;
 		ySpeed_ = ySpeed / xSpeed;
 	}
-	pierce_ = 1;
+	power_ = power;
 }
 
 void Projectile::draw() {
@@ -64,15 +64,16 @@ void Projectile::update(sf::Time& elapsed) {
 	sprite_.setPosition(pos);
 }
 
+int Projectile::getPower() {
+	return power_;
+}
+
 sf::FloatRect Projectile::getCollisionRect() {
 	return sprite_.getGlobalBounds();
 }
 
 void Projectile::handleCollision(GameObject& otherGameObject) {
 	if (otherGameObject.hasTag("enemy")) {
-		pierce_--;
-		if (pierce_ < 1) {
-			makeDead();
-		}
+		makeDead();
 	}
 }

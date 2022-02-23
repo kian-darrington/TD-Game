@@ -3,16 +3,14 @@
 #include "Enemy.h"
 #include "Background.h"
 #include "Tower.h"
+#include "EnemySpawner.h"
 
 const int vright = 0, vdown = 1, vleft = 2, vup = 3, right = 4, down = 5, left = 6, up = 7;
 
 GameScene::GameScene() {
-	sf::Vector2f pos;
 	setLevelOne();
-	pos.x = 0;
-	pos.y = GAME.getRenderWindow().getSize().y / 2 - 5;
-	EnemyPtr enemy1 = std::make_shared<Enemy>(pos, 2);
-	addGameObject(enemy1);
+	EnemySpawnerPtr enemyspawner = std::make_shared<EnemySpawner>();
+	addGameObject(enemyspawner);
 	TowerPtr tower = std::make_shared<Tower>(sf::Vector2f(350.0, 150.0));
 	addGameObject(tower);
 }
@@ -27,6 +25,10 @@ void GameScene::setLevelOne() {
 	pos.y = (GAME.getRenderWindow().getSize().y / 2) - 300;
 	LinePtr secondLine = std::make_shared<Line>(up, pos);
 	addGameObject(secondLine);
+	pos.x = 300;
+	pos.y = GAME.getRenderWindow().getSize().y / 2 - 200;
+	LinePtr bugline = std::make_shared<Line>(up, pos);
+	addGameObject(bugline);
 	pos.x = 300;
 	pos.y = (GAME.getRenderWindow().getSize().y / 2) - 300;
 	LinePtr thirdLine = std::make_shared<Line>(right, pos);

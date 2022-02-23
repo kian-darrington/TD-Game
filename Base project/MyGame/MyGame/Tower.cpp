@@ -3,7 +3,7 @@
 #include "Tower.h"
 #include "Projectile.h"
 Tower::Tower(sf::Vector2f pos){
-	pierce_ = 2;
+	power_ = 1;
 	tower_.setTexture(GAME.getTexture("Resources/tower.png"));
 	towerRange_.setTexture(GAME.getTexture("Resources/towerrange.png"));
 	towerRange_.setColor(sf::Color::Transparent);
@@ -23,12 +23,25 @@ void Tower::draw() {
 
 void Tower::update(sf::Time& elapsed) {
 	int msElapsed = elapsed.asMilliseconds();
+	int whichone = 0;
 	float angleTotal = 0.0;
 	attackTimer_ -= msElapsed;
-	if (attack_ && attackTimer_ <= 0) {
+	if (attack_ && attackTimer_ <= 0 && attackObject_.size() > 0) {
+		for (int i = 0; i < attackObject_.size(); i++) {
+			bool rightOne = true;
+			for (int o = 0; o < attackObject_.size(); o++) {
+				if (attackObject_[i].x < attackObject_[o].x) {
+					rightOne = false;
+				}
+			}
+			if (rightOne == true) {
+				whichone = i;
+				break;
+			}
+		}
 		sf::Vector2f towerCenter(tower_.getPosition().x + tower_.getGlobalBounds().width / 2, tower_.getPosition().y + tower_.getGlobalBounds().height / 2);
-		sf::Vector2f attackPoint = sf::Vector2f(towerCenter.x - attackObject_.x, towerCenter.y - attackObject_.y);
-		ProjectilePtr projectile = std::make_shared<Projectile>(towerCenter, attackPoint, attackPoint.x, attackPoint.y);
+		sf::Vector2f attackPoint = sf::Vector2f(towerCenter.x - attackObject_[whichone].x, towerCenter.y - attackObject_[whichone].y);
+		ProjectilePtr projectile = std::make_shared<Projectile>(towerCenter, attackPoint, attackPoint.x, attackPoint.y, power_);
 		GAME.getCurrentScene().addGameObject(projectile);
 		if (attackPoint.x > 0 && attackPoint.y < 0) {
 			angleTotal += 90.0 * 0;
@@ -56,6 +69,7 @@ void Tower::update(sf::Time& elapsed) {
 		towerRange_.setColor(sf::Color::Transparent);
 	}
 	attack_ = false;
+	attackObject_.clear();
 }
 
 sf::FloatRect Tower::getCollisionRect() {
@@ -65,6 +79,6 @@ sf::FloatRect Tower::getCollisionRect() {
 void Tower::handleCollision(GameObject& otherGameObject) {
 	if (otherGameObject.hasTag("enemy")) {
 		attack_ = true;
-		attackObject_ = otherGameObject.getObjectPosition();
+		attackObject_.push_back(otherGameObject.getObjectPosition());
 	}
 }

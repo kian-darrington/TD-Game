@@ -24,6 +24,9 @@ public:
 	// draw is called once per frame. Use this to draw your object to the screen.
 	virtual void draw() {}
 
+	// returns power of projectile
+	virtual int getPower() { return int(); }
+
 	// This flag indicates whether this game object should be checked for collisions.
 	// The more game objects in the scene that need to be checked, the longer it takes.
 	bool isCollisionCheckEnabled();

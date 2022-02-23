@@ -11,6 +11,9 @@ Enemy::Enemy(sf::Vector2f pos, int layer) {
 }
 
 void Enemy::layerCheck() {
+	if (layer_ < 1) {
+		makeDead();
+	}
 	if (layer_ == 1) {
 		sprite_.setTexture(GAME.getTexture("Resources/meteor.png"));
 	}
@@ -26,6 +29,9 @@ void Enemy::speedCheck() {
 	}
 	else if (layer_ == 2) {
 		speedBoost = 1.5f;
+	}
+	else {
+		speedBoost = 1.0f;
 	}
 }
 
@@ -86,7 +92,9 @@ void Enemy::handleCollision(GameObject& otherGameObject) {
 		direction_ = 3;
 	}
 	if (otherGameObject.hasTag("projectile")) {
-		layer_--;
+		if (!otherGameObject.isDead()) {
+			layer_ -= otherGameObject.getPower();
+		}
 		if (layer_ < 1) {
 			makeDead();
 		}
