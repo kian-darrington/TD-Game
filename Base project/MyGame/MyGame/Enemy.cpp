@@ -14,11 +14,15 @@ void Enemy::layerCheck() {
 	if (layer_ < 1) {
 		makeDead();
 	}
-	if (layer_ == 1) {
+	else if (layer_ == 1) {
 		sprite_.setTexture(GAME.getTexture("Resources/meteor.png"));
 	}
 	else if (layer_ == 2) {
 		sprite_.setTexture(GAME.getTexture("Resources/cake.png"));
+		speedBoost = 1.25f;
+	}
+	else if (layer_ == 3) {
+		sprite_.setTexture(GAME.getTexture("Resources/enemy2.png"));
 		speedBoost = 1.5f;
 	}
 }
@@ -28,6 +32,9 @@ void Enemy::speedCheck() {
 		speedBoost = 1.0f;
 	}
 	else if (layer_ == 2) {
+		speedBoost = 1.25f;
+	}
+	else if (layer_ == 3) {
 		speedBoost = 1.5f;
 	}
 	else {
