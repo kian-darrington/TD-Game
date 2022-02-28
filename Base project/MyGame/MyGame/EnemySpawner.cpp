@@ -1,4 +1,5 @@
 #include "EnemySpawner.h"
+#include "GameScene.h"
 #include "Enemy.h"
 
 const int SPACE_DELAY = 920;
@@ -8,6 +9,8 @@ void EnemySpawner::update(sf::Time& elapsed) {
 	difficultyTimer_ += elapsed.asMilliseconds();
 	if (difficultyTimer_ > 60000) {
 		difficulty_++;
+		GameScene& scene = (GameScene&)GAME.getCurrentScene();
+		scene.increaseDangerLevel();
 		difficultyTimer_ = 0;
 	}
 	if (timer_ < 1) {

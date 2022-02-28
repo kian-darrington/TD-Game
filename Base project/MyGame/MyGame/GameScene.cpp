@@ -4,6 +4,7 @@
 #include "Background.h"
 #include "Tower.h"
 #include "EnemySpawner.h"
+#include "InGameText.h"
 
 const int vright = 0, vdown = 1, vleft = 2, vup = 3, right = 4, down = 5, left = 6, up = 7;
 
@@ -13,6 +14,8 @@ GameScene::GameScene() {
 	addGameObject(enemyspawner);
 	TowerPtr tower = std::make_shared<Tower>(sf::Vector2f(350.0, 150.0));
 	addGameObject(tower);
+	InGameTextPtr GameText = std::make_shared<InGameText>();
+	addGameObject(GameText);
 }
 
 void GameScene::setLevelOne() {
@@ -101,4 +104,28 @@ void GameScene::setLevelOne() {
 	pos.y = (GAME.getRenderWindow().getSize().y / 2) - 10;
 	LinePtr vLine8 = std::make_shared<Line>(vright, pos);
 	addGameObject(vLine8);
+}
+
+void GameScene::increaseMoney() {
+	money_++;
+}
+
+void GameScene::increaseDangerLevel() {
+	dangerLevel_++;
+}
+
+void GameScene::decreaseLives(int layer) {
+	lives_ -= layer;
+}
+
+int GameScene::getLives() {
+	return lives_;
+}
+
+int GameScene::getMoney() {
+	return money_;
+}
+
+int GameScene::getDangerLevel() {
+	return dangerLevel_;
 }

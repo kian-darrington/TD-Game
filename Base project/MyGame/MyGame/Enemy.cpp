@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "GameScene.h"
 
 const float SPEED = 0.05f;
 
@@ -22,7 +23,7 @@ void Enemy::layerCheck() {
 		speedBoost = 1.25f;
 	}
 	else if (layer_ == 3) {
-		sprite_.setTexture(GAME.getTexture("Resources/enemy2.png"));
+		sprite_.setTexture(GAME.getTexture("Resources/icecream.png"));
 		speedBoost = 1.5f;
 	}
 }
@@ -52,6 +53,8 @@ void Enemy::update(sf::Time& elapsed) {
 	float y = pos.y;
 	int msElapsed = elapsed.asMilliseconds();
 	if (x > GAME.getRenderWindow().getSize().x) {
+		GameScene& scene = (GameScene&)GAME.getCurrentScene();
+		scene.decreaseLives(layer_);
 		makeDead();
 	}
 	else if (!collision){
@@ -101,6 +104,8 @@ void Enemy::handleCollision(GameObject& otherGameObject) {
 	if (otherGameObject.hasTag("projectile")) {
 		if (!otherGameObject.isDead()) {
 			layer_ -= otherGameObject.getPower();
+			GameScene& scene = (GameScene&)GAME.getCurrentScene();
+			scene.increaseMoney();
 		}
 		if (layer_ < 1) {
 			makeDead();
