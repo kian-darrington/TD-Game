@@ -94,6 +94,7 @@
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="InGameText.cpp" />
+    <ClCompile Include="TowerPlacer.cpp" />
     <ClCompile Include="Tower.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +107,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="EnemySpawner.h" />
+    <ClInclude Include="TowerPlacer.h" />
     <ClInclude Include="InGameText.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Tower.h" />

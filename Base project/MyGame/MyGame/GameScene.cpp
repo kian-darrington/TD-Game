@@ -1,6 +1,5 @@
 #include "GameScene.h"
 #include "Line.h"
-#include "Enemy.h"
 #include "Background.h"
 #include "Tower.h"
 #include "EnemySpawner.h"
@@ -108,6 +107,10 @@ void GameScene::setLevelOne() {
 
 void GameScene::increaseMoney() {
 	money_++;
+}
+
+void GameScene::decreaseMoney(int cost) {
+	money_ -= cost;
 }
 
 void GameScene::increaseDangerLevel() {

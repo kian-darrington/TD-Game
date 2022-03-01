@@ -22,6 +22,7 @@
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="InGameText.cpp" />
+    <ClCompile Include="TowerPlacer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\AnimatedSprite.h">
@@ -47,6 +48,7 @@
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="EnemySpawner.h" />
     <ClInclude Include="InGameText.h" />
+    <ClInclude Include="TowerPlacer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

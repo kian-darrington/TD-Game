@@ -8,6 +8,7 @@ class GameScene : public Scene {
   GameScene();
   void setLevelOne();
   void increaseMoney();
+  void decreaseMoney(int cost);
   void decreaseLives(int layer);
   void increaseDangerLevel();
   int getLives();
