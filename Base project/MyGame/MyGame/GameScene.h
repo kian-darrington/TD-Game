@@ -16,7 +16,7 @@ class GameScene : public Scene {
   int getDangerLevel();
 private:
 	int lives_ = 100;
-	int money_ = 0;
+	int money_ = 50;
 	int dangerLevel_ = 1;
 };
 

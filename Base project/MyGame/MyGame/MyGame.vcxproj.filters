@@ -23,6 +23,8 @@
     <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="InGameText.cpp" />
     <ClCompile Include="TowerPlacer.cpp" />
+    <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="TowerFootprint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\AnimatedSprite.h">
@@ -49,6 +51,8 @@
     <ClInclude Include="EnemySpawner.h" />
     <ClInclude Include="InGameText.h" />
     <ClInclude Include="TowerPlacer.h" />
+    <ClInclude Include="Mouse.h" />
+    <ClInclude Include="TowerFootprint.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

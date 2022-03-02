@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include <set>
 #include <string>
 #include <memory>
@@ -27,6 +28,9 @@ public:
 	// returns power of projectile
 	virtual int getPower() { return int(); }
 
+	// sets a tower to fire and position of enemy
+	virtual void setClickedOn(bool click) {}
+
 	// This flag indicates whether this game object should be checked for collisions.
 	// The more game objects in the scene that need to be checked, the longer it takes.
 	bool isCollisionCheckEnabled();
@@ -50,6 +54,7 @@ private:
 
 	bool isDead_ = false;
 	bool isCollisionCheckEnabled_ = false;
+	bool isCollisionCheckEnabled2_ = false;
 };
 
 typedef std::shared_ptr<GameObject> GameObjectPtr;

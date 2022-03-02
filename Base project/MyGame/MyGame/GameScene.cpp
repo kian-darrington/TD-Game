@@ -1,9 +1,10 @@
 #include "GameScene.h"
 #include "Line.h"
 #include "Background.h"
-#include "Tower.h"
+#include "TowerPlacer.h"
 #include "EnemySpawner.h"
 #include "InGameText.h"
+#include "Mouse.h"
 
 const int vright = 0, vdown = 1, vleft = 2, vup = 3, right = 4, down = 5, left = 6, up = 7;
 
@@ -11,10 +12,12 @@ GameScene::GameScene() {
 	setLevelOne();
 	EnemySpawnerPtr enemyspawner = std::make_shared<EnemySpawner>();
 	addGameObject(enemyspawner);
-	TowerPtr tower = std::make_shared<Tower>(sf::Vector2f(350.0, 150.0));
+	TowerPlacerPtr tower = std::make_shared<TowerPlacer>();
 	addGameObject(tower);
 	InGameTextPtr GameText = std::make_shared<InGameText>();
 	addGameObject(GameText);
+	CursorPtr mouse = std::make_shared<Cursor>();
+	addGameObject(mouse);
 }
 
 void GameScene::setLevelOne() {

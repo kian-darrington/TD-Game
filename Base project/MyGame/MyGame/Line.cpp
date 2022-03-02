@@ -3,15 +3,19 @@
 Line::Line(int type, sf::Vector2f pos) {
 	if (type == 0) {
 		sprite_.setTexture(GAME.getTexture("Resources/visible-horizontal-line.png"));
+		assignTag("path");
 	}
 	else if (type == 1) {
 		sprite_.setTexture(GAME.getTexture("Resources/visible-vertical-line.png"));
+		assignTag("path");
 	}
 	else if (type == 2) {
 		sprite_.setTexture(GAME.getTexture("Resources/visible-horizontal-line.png"));
+		assignTag("path");
 	}
 	else if (type == 3) {
 		sprite_.setTexture(GAME.getTexture("Resources/visible-vertical-line.png"));
+		assignTag("path");
 	}
 	else if (type == 4) {
 		sprite_.setTexture(GAME.getTexture("Resources/horizontal-line.png"));

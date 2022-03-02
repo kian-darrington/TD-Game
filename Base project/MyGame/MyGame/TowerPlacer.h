@@ -18,6 +18,7 @@ private:
 	bool place_ = false;
 	bool release_ = false;
 	bool canPlace_ = true;
+	int towernum_ = 1;
 };
 
 typedef std::shared_ptr<TowerPlacer> TowerPlacerPtr;

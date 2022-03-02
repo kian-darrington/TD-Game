@@ -1,14 +1,21 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include "Tower.h"
+#include "TowerFootprint.h"
 #include "Projectile.h"
-Tower::Tower(sf::Vector2f pos){
+#include <sstream>
+Tower::Tower(sf::Vector2f pos, int towernum){
 	power_ = 1;
 	tower_.setTexture(GAME.getTexture("Resources/tower.png"));
 	towerRange_.setTexture(GAME.getTexture("Resources/towerrange.png"));
 	towerRange_.setColor(sf::Color::Transparent);
-	assignTag("tower");
+	assignTag("towerrange");
+	std::stringstream name;
+	name << "tower" << towernum;
+	assignTag(name.str());
 	tower_.setPosition(pos);
+	TowerFootPtr towerfoot = std::make_shared<TowerFoot>(pos, towernum);
+	GAME.getCurrentScene().addGameObject(towerfoot);
 	towerRange_.setPosition(sf::Vector2f(pos.x - (towerRange_.getGlobalBounds().width / 2) + (tower_.getGlobalBounds().width / 2), pos.y - (towerRange_.getGlobalBounds().height / 2) + (tower_.getGlobalBounds().width / 2)));
 	setCollisionCheckEnabled(true);
 	attackTimer_ = attackDelay_;
@@ -68,8 +75,15 @@ void Tower::update(sf::Time& elapsed) {
 	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
 		towerRange_.setColor(sf::Color::Transparent);
 	}
+	if (clickedOn_) {
+		towerRange_.setColor(sf::Color::White);
+	}
 	attack_ = false;
 	attackObject_.clear();
+}
+
+void Tower::setClickedOn(bool click) {
+	clickedOn_ = click;
 }
 
 sf::FloatRect Tower::getCollisionRect() {

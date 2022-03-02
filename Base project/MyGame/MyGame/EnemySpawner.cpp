@@ -3,6 +3,7 @@
 #include "Enemy.h"
 
 const int SPACE_DELAY = 920;
+const int ENEMY_NUMBER = 3;
 
 void EnemySpawner::update(sf::Time& elapsed) {
 	timer_ -= elapsed.asMilliseconds();
@@ -18,8 +19,16 @@ void EnemySpawner::update(sf::Time& elapsed) {
 		pos.x = -64;
 		pos.y = GAME.getRenderWindow().getSize().y / 2 - 15;
 		int enemyType = 1;
-		if (difficulty_ > 1) {
+		if (difficulty_ > 1 && difficulty_ <= ENEMY_NUMBER) {
 			enemyType = 1 + rand() % difficulty_;
+		}
+		else if (difficulty_ >= ENEMY_NUMBER) {
+			if (difficulty_ < ENEMY_NUMBER * 2) {
+				enemyType = (difficulty_ - ENEMY_NUMBER) + rand() % (difficulty_ - ENEMY_NUMBER);
+			}
+			else {
+				enemyType = ENEMY_NUMBER;
+			}
 		}
 		EnemyPtr enemy1 = std::make_shared<Enemy>(pos, enemyType);
 		GAME.getCurrentScene().addGameObject(enemy1);
