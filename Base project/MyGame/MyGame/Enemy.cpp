@@ -103,9 +103,15 @@ void Enemy::handleCollision(GameObject& otherGameObject) {
 	}
 	if (otherGameObject.hasTag("projectile")) {
 		if (!otherGameObject.isDead()) {
+			int pastLayer = layer_;
 			layer_ -= otherGameObject.getPower();
 			GameScene& scene = (GameScene&)GAME.getCurrentScene();
-			scene.increaseMoney();
+			if (layer_ < 1) {
+				scene.increaseMoney(pastLayer);
+			}
+			else {
+				scene.increaseMoney(otherGameObject.getPower());
+			}
 		}
 		if (layer_ < 1) {
 			makeDead();

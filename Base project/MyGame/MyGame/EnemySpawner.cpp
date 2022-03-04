@@ -22,9 +22,9 @@ void EnemySpawner::update(sf::Time& elapsed) {
 		if (difficulty_ > 1 && difficulty_ <= ENEMY_NUMBER) {
 			enemyType = 1 + rand() % difficulty_;
 		}
-		else if (difficulty_ >= ENEMY_NUMBER) {
-			if (difficulty_ < ENEMY_NUMBER * 2) {
-				enemyType = (difficulty_ - ENEMY_NUMBER) + rand() % (difficulty_ - ENEMY_NUMBER);
+		else if (difficulty_ >= ENEMY_NUMBER - 1) {
+			if (difficulty_ < (ENEMY_NUMBER * 2) - 1) {
+				enemyType = (difficulty_ - ENEMY_NUMBER + 1) + rand() % (difficulty_ - ENEMY_NUMBER + 1);
 			}
 			else {
 				enemyType = ENEMY_NUMBER;
@@ -32,6 +32,6 @@ void EnemySpawner::update(sf::Time& elapsed) {
 		}
 		EnemyPtr enemy1 = std::make_shared<Enemy>(pos, enemyType);
 		GAME.getCurrentScene().addGameObject(enemy1);
-		timer_ = SPACE_DELAY / (1 + (float)(difficulty_ / 10.0f));
+		timer_ = SPACE_DELAY / (1 + (float)(difficulty_ / 7.0f));
 	}
 }

@@ -21,11 +21,14 @@ sf::FloatRect TowerFoot::getCollisionRect() {
 }
 
 void TowerFoot::handleCollision(GameObject& otherGameObject) {
-	if (otherGameObject.hasTag(tower_)) {
-		otherGameObject.setClickedOn(clickedOn_);
-	}
 	if (otherGameObject.hasTag("mouse")) {
 		mouseOn_ = true;
+	}
+	if (otherGameObject.hasTag(tower_)) {
+		otherGameObject.setClickedOn(clickedOn_, spaceCheck_);
+		if (otherGameObject.isDead()) {
+			makeDead();
+		}
 	}
 }
 
@@ -34,13 +37,32 @@ void TowerFoot::update(sf::Time& elapsed) {
 }
 
 void TowerFoot::handleEvent(sf::Event& eve) {
-	if (eve.type == sf::Event::MouseButtonPressed && mouseOn_) {
+	if (eve.type == sf::Event::MouseButtonPressed && clickedOn_) {
+		clickedOn_ = false;
+	}
+	else if (eve.type == sf::Event::MouseButtonPressed && mouseOn_) {
 		clickedOn_ = true;
 	}
 	else if (eve.type == sf::Event::MouseButtonPressed && !mouseOn_) {
 		clickedOn_ = false;
 	}
-	else if (eve.type == sf::Event::KeyPressed) {
+	if (eve.type == sf::Event::KeyReleased && spaceCheck_) {
+		clickedOn_ = true;
+		spaceCheck_ = false;
+	}
+	if (eve.type == sf::Event::KeyPressed) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && clickedOn_) {
+			spaceCheck_ = true;
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace) && clickedOn_) {
+			makeDead();
+		}
+		clickedOn_ = false;
+	}
+	if (eve.type == sf::Event::MouseButtonReleased && mouseOn_) {
+		clickedOn_ = true;
+	}
+	if (eve.type == sf::Event::MouseButtonReleased && !mouseOn_) {
 		clickedOn_ = false;
 	}
 	mouseOn_ = false;

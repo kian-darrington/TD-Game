@@ -25,6 +25,7 @@
     <ClCompile Include="TowerPlacer.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="TowerFootprint.cpp" />
+    <ClCompile Include="UpgradeText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\AnimatedSprite.h">
@@ -53,6 +54,7 @@
     <ClInclude Include="TowerPlacer.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="TowerFootprint.h" />
+    <ClInclude Include="UpgradeText.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

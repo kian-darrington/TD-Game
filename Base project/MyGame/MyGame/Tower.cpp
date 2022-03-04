@@ -4,6 +4,9 @@
 #include "TowerFootprint.h"
 #include "Projectile.h"
 #include <sstream>
+#include "UpgradeText.h"
+#include "GameScene.h"
+
 Tower::Tower(sf::Vector2f pos, int towernum){
 	power_ = 1;
 	tower_.setTexture(GAME.getTexture("Resources/tower.png"));
@@ -29,6 +32,7 @@ void Tower::draw() {
 }
 
 void Tower::update(sf::Time& elapsed) {
+	GameScene& scene = (GameScene&)GAME.getCurrentScene();
 	int msElapsed = elapsed.asMilliseconds();
 	int whichone = 0;
 	float angleTotal = 0.0;
@@ -77,17 +81,49 @@ void Tower::update(sf::Time& elapsed) {
 	}
 	if (clickedOn_) {
 		towerRange_.setColor(sf::Color::White);
+		if (!textOne_) {
+			UpgradeTextPtr text = std::make_shared<UpgradeText>(level_, towerRange_.getScale().x, (float)(attackDelay_ / 1000.0f), power_);
+			GAME.getCurrentScene().addGameObject(text);
+			textOne_ = true;
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace)) {
+			scene.increaseMoney(((moneySpent_ + 5 + level_ * 15) / 2));
+			makeDead();
+			clickedOn_ = false;
+		}
+	}
+	else {
+		textOne_ = false;
+	}
+	if (spaceCheck_ && scene.getMoney() >= (5 + (level_ * 10))) {
+		level_++;
+		if ((level_ + 1) % 2 == 0) {
+			power_++;
+		}
+		towerRange_.scale(1.1f, 1.1f);
+		sf::Vector2f pos = tower_.getPosition();
+		towerRange_.setPosition(sf::Vector2f(pos.x - (towerRange_.getGlobalBounds().width / 2) + (tower_.getGlobalBounds().width / 2), pos.y - (towerRange_.getGlobalBounds().height / 2) + (tower_.getGlobalBounds().width / 2)));
+		attackDelay_ = attackDelay_ / 1.1f;
+		scene.decreaseMoney(5 + ((level_ - 1) * 10));
+		clickedOn_ = false;
 	}
 	attack_ = false;
 	attackObject_.clear();
 }
 
-void Tower::setClickedOn(bool click) {
+void Tower::setClickedOn(bool click, bool space) {
 	clickedOn_ = click;
+	spaceCheck_ = space;
 }
 
 sf::FloatRect Tower::getCollisionRect() {
 	return towerRange_.getGlobalBounds();
+}
+
+void Tower::handleEvent(sf::Event eve) {
+	if (eve.type == sf::Event::MouseButtonPressed) {
+		clickedOn_ = false;
+	}
 }
 
 void Tower::handleCollision(GameObject& otherGameObject) {

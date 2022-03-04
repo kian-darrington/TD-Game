@@ -11,7 +11,7 @@ public:
 	void handleCollision(GameObject& otherGameObject);
 	void handleEvent(sf::Event& eve);
 private:
-	bool clickedOn_ = false, mouseOn_ = false;
+	bool clickedOn_ = false, mouseOn_ = false, spaceCheck_ = false;
 	sf::Sprite sprite_;
 	std::string tower_;
 };

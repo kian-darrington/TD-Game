@@ -108,8 +108,8 @@ void GameScene::setLevelOne() {
 	addGameObject(vLine8);
 }
 
-void GameScene::increaseMoney() {
-	money_++;
+void GameScene::increaseMoney(int increase) {
+	money_ += increase;
 }
 
 void GameScene::decreaseMoney(int cost) {
