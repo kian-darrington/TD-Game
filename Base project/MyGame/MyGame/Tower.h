@@ -19,7 +19,7 @@ private:
 	int attackTimer_ = 0;
 	sf::Sprite tower_;
 	sf::Sprite towerRange_;
-	bool attack_ = false, clickedOn_ = false, textOne_ = false, spaceCheck_ = false;
+	bool attack_ = false, clickedOn_ = false, textOne_ = false, spaceCheck_ = false, upgradeOnce_ = true;
 	std::vector<sf::Vector2f> attackObject_;
 	bool placeDown_;
 };

@@ -26,6 +26,10 @@ void Enemy::layerCheck() {
 		sprite_.setTexture(GAME.getTexture("Resources/icecream.png"));
 		speedBoost = 1.5f;
 	}
+	else if (layer_ == 4) {
+		sprite_.setTexture(GAME.getTexture("Resources/donut.png"));
+		speedBoost = 1.75f;
+	}
 }
 
 void Enemy::speedCheck() {
@@ -38,6 +42,9 @@ void Enemy::speedCheck() {
 	else if (layer_ == 3) {
 		speedBoost = 1.5f;
 	}
+	else if (layer_ == 4) {
+		speedBoost = 1.75;
+	}
 	else {
 		speedBoost = 1.0f;
 	}
@@ -48,6 +55,7 @@ void Enemy::draw() {
 }
 
 void Enemy::update(sf::Time& elapsed) {
+	GameScene& scene = (GameScene&)GAME.getCurrentScene();
 	sf::Vector2f pos = sprite_.getPosition();
 	float x = pos.x;
 	float y = pos.y;
@@ -64,16 +72,16 @@ void Enemy::update(sf::Time& elapsed) {
 	}
 	if (collision) {
 		if (direction_ == 0) {
-			x += SPEED * msElapsed * speedBoost;
+			x += SPEED * msElapsed * speedBoost * (1.0f + (float)((float)((scene.getDangerLevel() - 1) / 1.5f) / 10.0f));
 		}
 		else if (direction_ == 3) {
-			y += SPEED * msElapsed * speedBoost;
+			y += SPEED * msElapsed * speedBoost * (1.0f + (float)((float)((scene.getDangerLevel() - 1) / 1.5f) / 10.0f));
 		}
 		else if (direction_ == 1) {
-			x -= SPEED * msElapsed * speedBoost;
+			x -= SPEED * msElapsed * speedBoost * (1.0f + (float)((float)((scene.getDangerLevel() - 1) / 1.5f) / 10.0f));
 		}
 		else if (direction_ == 2) {
-			y -= SPEED * msElapsed * speedBoost;
+			y -= SPEED * msElapsed * speedBoost * (1.0f + (float)((float)((scene.getDangerLevel() - 1) / 1.5f) / 10.0f));
 		}
 		sprite_.setPosition(sf::Vector2f(x, y));
 	}

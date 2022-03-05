@@ -82,12 +82,12 @@ void Tower::update(sf::Time& elapsed) {
 	if (clickedOn_) {
 		towerRange_.setColor(sf::Color::White);
 		if (!textOne_) {
-			UpgradeTextPtr text = std::make_shared<UpgradeText>(level_, towerRange_.getScale().x, (float)(attackDelay_ / 1000.0f), power_);
+			UpgradeTextPtr text = std::make_shared<UpgradeText>(level_, towerRange_.getScale().x, (float)(attackDelay_ / 1000.0f), power_, moneySpent_);
 			GAME.getCurrentScene().addGameObject(text);
 			textOne_ = true;
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace)) {
-			scene.increaseMoney(((moneySpent_ + 5 + level_ * 15) / 2));
+			scene.increaseMoney(((moneySpent_) / 2));
 			makeDead();
 			clickedOn_ = false;
 		}
@@ -96,16 +96,23 @@ void Tower::update(sf::Time& elapsed) {
 		textOne_ = false;
 	}
 	if (spaceCheck_ && scene.getMoney() >= (5 + (level_ * 10))) {
-		level_++;
-		if ((level_ + 1) % 2 == 0) {
-			power_++;
+		if (upgradeOnce_) {
+			level_++;
+			if ((level_) % 3 == 0) {
+				power_++;
+			}
+			moneySpent_ += (5 + (level_ * 10));
+			towerRange_.setScale(1.0f + (float)((level_ - 1) / 10.0f), 1.0f + (float)(level_ - 1) / 10.0f);
+			sf::Vector2f pos = tower_.getPosition();
+			towerRange_.setPosition(sf::Vector2f(pos.x - (towerRange_.getGlobalBounds().width / 2) + (tower_.getGlobalBounds().width / 2), pos.y - (towerRange_.getGlobalBounds().height / 2) + (tower_.getGlobalBounds().width / 2)));
+			attackDelay_ = attackDelay_ / 1.1f;
+			scene.decreaseMoney(5 + ((level_ - 1) * 10));
+			clickedOn_ = false;
+			upgradeOnce_ = false;
 		}
-		towerRange_.scale(1.1f, 1.1f);
-		sf::Vector2f pos = tower_.getPosition();
-		towerRange_.setPosition(sf::Vector2f(pos.x - (towerRange_.getGlobalBounds().width / 2) + (tower_.getGlobalBounds().width / 2), pos.y - (towerRange_.getGlobalBounds().height / 2) + (tower_.getGlobalBounds().width / 2)));
-		attackDelay_ = attackDelay_ / 1.1f;
-		scene.decreaseMoney(5 + ((level_ - 1) * 10));
-		clickedOn_ = false;
+	}
+	if (!spaceCheck_) {
+		upgradeOnce_ = true;
 	}
 	attack_ = false;
 	attackObject_.clear();

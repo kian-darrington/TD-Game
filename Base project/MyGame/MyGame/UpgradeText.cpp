@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string.h>
 
-UpgradeText::UpgradeText(int level, float range, float attack, int power) {
+UpgradeText::UpgradeText(int level, float range, float attack, int power, int money) {
 	text_.setFont(GAME.getFont("Resources/Courneuf-Regular.ttf"));
 	text_.setPosition(sf::Vector2f(GAME.getRenderWindow().getSize().x - 250, 10.0f));
 	text_.setCharacterSize(24);
@@ -12,6 +12,7 @@ UpgradeText::UpgradeText(int level, float range, float attack, int power) {
 	level_ = level;
 	range_ = range;
 	attack_ = attack;
+	moneySpent_ = money;
 }
 
 void UpgradeText::draw() {
@@ -20,7 +21,7 @@ void UpgradeText::draw() {
 
 void UpgradeText::update(sf::Time& elapsed) {
 	std::stringstream stream;
-	stream << "Level: " << level_ << "\nRange: " << range_ << "\nAttack Speed: " << attack_ << "\nPower: " << power_ << "\nUpgrade Cost: " << 5 + level_ * 10;
+	stream << "Level: " << level_ << "\nRange: " << range_ << "\nAttack Speed: " << attack_ << "\nPower: " << power_ << "\nUpgrade Cost: " << 5 + level_ * 10 << "\nSell Price: " << (moneySpent_ / 2);
 	text_.setString(stream.str());
 }
 
