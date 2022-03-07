@@ -95,18 +95,18 @@ void Tower::update(sf::Time& elapsed) {
 	else {
 		textOne_ = false;
 	}
-	if (spaceCheck_ && scene.getMoney() >= (5 + (level_ * 10))) {
+	if (spaceCheck_ && scene.getMoney() >= (int)(((5 + (level_ * 15))) * (float)(1.0f + (float)((level_ - 1) / 10.0f)))) {
 		if (upgradeOnce_) {
 			level_++;
 			if ((level_) % 3 == 0) {
 				power_++;
 			}
-			moneySpent_ += (5 + (level_ * 10));
+			moneySpent_ += (int)(((5 + ((level_ - 1) * 15))) * (float)(1.0f + (float)((level_ - 2) / 10.0f)));
 			towerRange_.setScale(1.0f + (float)((level_ - 1) / 10.0f), 1.0f + (float)(level_ - 1) / 10.0f);
 			sf::Vector2f pos = tower_.getPosition();
 			towerRange_.setPosition(sf::Vector2f(pos.x - (towerRange_.getGlobalBounds().width / 2) + (tower_.getGlobalBounds().width / 2), pos.y - (towerRange_.getGlobalBounds().height / 2) + (tower_.getGlobalBounds().width / 2)));
 			attackDelay_ = attackDelay_ / 1.1f;
-			scene.decreaseMoney(5 + ((level_ - 1) * 10));
+			scene.decreaseMoney((int)((5 + ((level_ - 1)* 15)) * (float)(1.0f + (float)((level_ - 2) / 10.0f))));
 			clickedOn_ = false;
 			upgradeOnce_ = false;
 		}

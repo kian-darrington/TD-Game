@@ -20,34 +20,24 @@ void Enemy::layerCheck() {
 	}
 	else if (layer_ == 2) {
 		sprite_.setTexture(GAME.getTexture("Resources/cake.png"));
-		speedBoost = 1.25f;
 	}
 	else if (layer_ == 3) {
 		sprite_.setTexture(GAME.getTexture("Resources/icecream.png"));
-		speedBoost = 1.5f;
+		layer_ = 4;
 	}
 	else if (layer_ == 4) {
 		sprite_.setTexture(GAME.getTexture("Resources/donut.png"));
-		speedBoost = 1.75f;
+		layer_ = 8;
 	}
+	else if (layer_ == 5) {
+		sprite_.setTexture(GAME.getTexture("Resources/crepe.png"));
+		layer_ = 16;
+	}
+	speedCheck();
 }
 
 void Enemy::speedCheck() {
-	if (layer_ == 1) {
-		speedBoost = 1.0f;
-	}
-	else if (layer_ == 2) {
-		speedBoost = 1.25f;
-	}
-	else if (layer_ == 3) {
-		speedBoost = 1.5f;
-	}
-	else if (layer_ == 4) {
-		speedBoost = 1.75;
-	}
-	else {
-		speedBoost = 1.0f;
-	}
+	speedBoost = 1.0f + ((float)layer_ / 8.0f);
 }
 
 void Enemy::draw() {
@@ -72,16 +62,16 @@ void Enemy::update(sf::Time& elapsed) {
 	}
 	if (collision) {
 		if (direction_ == 0) {
-			x += SPEED * msElapsed * speedBoost * (1.0f + (float)((float)((scene.getDangerLevel() - 1) / 1.5f) / 10.0f));
+			x += SPEED * msElapsed * speedBoost * (1.0f + (float)((float)((scene.getDangerLevel() - 1)) / 10.0f));
 		}
 		else if (direction_ == 3) {
-			y += SPEED * msElapsed * speedBoost * (1.0f + (float)((float)((scene.getDangerLevel() - 1) / 1.5f) / 10.0f));
+			y += SPEED * msElapsed * speedBoost * (1.0f + (float)((float)((scene.getDangerLevel() - 1)) / 10.0f));
 		}
 		else if (direction_ == 1) {
-			x -= SPEED * msElapsed * speedBoost * (1.0f + (float)((float)((scene.getDangerLevel() - 1) / 1.5f) / 10.0f));
+			x -= SPEED * msElapsed * speedBoost * (1.0f + (float)((float)((scene.getDangerLevel() - 1)) / 10.0f));
 		}
 		else if (direction_ == 2) {
-			y -= SPEED * msElapsed * speedBoost * (1.0f + (float)((float)((scene.getDangerLevel() - 1) / 1.5f) / 10.0f));
+			y -= SPEED * msElapsed * speedBoost * (1.0f + (float)((float)((scene.getDangerLevel() - 1)) / 10.0f));
 		}
 		sprite_.setPosition(sf::Vector2f(x, y));
 	}

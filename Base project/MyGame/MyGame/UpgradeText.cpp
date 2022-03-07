@@ -21,7 +21,7 @@ void UpgradeText::draw() {
 
 void UpgradeText::update(sf::Time& elapsed) {
 	std::stringstream stream;
-	stream << "Level: " << level_ << "\nRange: " << range_ << "\nAttack Speed: " << attack_ << "\nPower: " << power_ << "\nUpgrade Cost: " << 5 + level_ * 10 << "\nSell Price: " << (moneySpent_ / 2);
+	stream << "Level: " << level_ << "\nRange: " << range_ << "\nAttack Speed: " << attack_ << "\nPower: " << power_ << "\nUpgrade Cost: " << (int)(((5 + (level_ * 15))) * (float)(1.0f + (float)((level_ - 1) / 10.0f))) << "\nSell Price: " << (moneySpent_ / 2);
 	text_.setString(stream.str());
 }
 
