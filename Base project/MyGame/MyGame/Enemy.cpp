@@ -33,11 +33,19 @@ void Enemy::layerCheck() {
 		sprite_.setTexture(GAME.getTexture("Resources/crepe.png"));
 		layer_ = 16;
 	}
+	else if (layer_ == 6) {
+		sprite_.setTexture(GAME.getTexture("Resources/brownie.png"));
+		layer_ = 32;
+	}
+	totalLayers_ = layer_;
 	speedCheck();
 }
 
 void Enemy::speedCheck() {
 	speedBoost = 1.0f + ((float)layer_ / 8.0f);
+	if (totalLayers_ > 16) {
+		speedBoost = 1.0f + (float)(layer_ / 32.0f);
+	}
 }
 
 void Enemy::draw() {

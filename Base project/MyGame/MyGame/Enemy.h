@@ -12,6 +12,7 @@ public:
 	void layerCheck();
 	void speedCheck();
 private:
+	int totalLayers_;
 	int layer_;
 	sf::Sprite sprite_;
 	int xSpeed_ = 0.2f;

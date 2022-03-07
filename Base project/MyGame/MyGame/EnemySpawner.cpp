@@ -3,7 +3,7 @@
 #include "Enemy.h"
 
 const int SPACE_DELAY = 920;
-const int ENEMY_NUMBER = 5;
+const int ENEMY_NUMBER = 6;
 
 void EnemySpawner::update(sf::Time& elapsed) {
 	timer_ -= elapsed.asMilliseconds();
@@ -33,16 +33,25 @@ void EnemySpawner::update(sf::Time& elapsed) {
 			enemyType = 1 + rand() % 4;
 			break;
 		case 5:
-			enemyType = 2 + rand() % 3;
+			enemyType = 1 + rand() % 5;
 			break;
 		case 6:
 			enemyType = 2 + rand() % 4;
 			break;
 		case 7:
-			enemyType = 3 + rand() % 3;
+			enemyType = 2 + rand() % 4;
 			break;
 		case 8:
-			enemyType = 4 + rand() % 2;
+			enemyType = 3 + rand() % 3;
+			break;
+		case 9:
+			enemyType = 3 + rand() % 4;
+			break;
+		case 10:
+			enemyType = 4 + rand() % 3;
+			break;
+		case 11:
+			enemyType = 5 + rand() & 2;
 			break;
 		default:
 			enemyType = ENEMY_NUMBER;
