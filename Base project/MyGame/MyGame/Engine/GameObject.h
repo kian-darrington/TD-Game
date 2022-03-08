@@ -54,7 +54,6 @@ private:
 
 	bool isDead_ = false;
 	bool isCollisionCheckEnabled_ = false;
-	bool isCollisionCheckEnabled2_ = false;
 };
 
 typedef std::shared_ptr<GameObject> GameObjectPtr;

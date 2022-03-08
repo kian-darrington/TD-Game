@@ -95,6 +95,8 @@
     <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="InGameText.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
+    <ClCompile Include="GameOverText.cpp" />
     <ClCompile Include="UpgradeText.cpp" />
     <ClCompile Include="TowerFootprint.cpp" />
     <ClCompile Include="TowerPlacer.cpp" />
@@ -110,6 +112,8 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="EnemySpawner.h" />
+    <ClInclude Include="GameOverScene.h" />
+    <ClInclude Include="GameOverText.h" />
     <ClInclude Include="UpgradeText.h" />
     <ClInclude Include="TowerFootprint.h" />
     <ClInclude Include="Mouse.h" />

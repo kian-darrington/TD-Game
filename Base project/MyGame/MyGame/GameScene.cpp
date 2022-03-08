@@ -1,4 +1,5 @@
 #include "GameScene.h"
+#include "GameOverScene.h"
 #include "Line.h"
 #include "Background.h"
 #include "TowerPlacer.h"
@@ -122,6 +123,10 @@ void GameScene::increaseDangerLevel() {
 
 void GameScene::decreaseLives(int layer) {
 	lives_ -= layer;
+	if (lives_ <= 0) {
+		GameOverScenePtr scene = std::make_shared<GameOverScene>();
+		GAME.setScene(scene);
+	}
 }
 
 int GameScene::getLives() {

@@ -39,18 +39,15 @@ void EnemySpawner::update(sf::Time& elapsed) {
 			enemyType = 2 + rand() % 4;
 			break;
 		case 7:
-			enemyType = 2 + rand() % 4;
-			break;
-		case 8:
 			enemyType = 3 + rand() % 3;
 			break;
-		case 9:
+		case 8:
 			enemyType = 3 + rand() % 4;
 			break;
-		case 10:
+		case 9:
 			enemyType = 4 + rand() % 3;
 			break;
-		case 11:
+		case 10:
 			enemyType = 5 + rand() & 2;
 			break;
 		default:

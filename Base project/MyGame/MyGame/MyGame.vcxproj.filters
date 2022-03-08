@@ -26,6 +26,8 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="TowerFootprint.cpp" />
     <ClCompile Include="UpgradeText.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
+    <ClCompile Include="GameOverText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\AnimatedSprite.h">
@@ -55,6 +57,8 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="TowerFootprint.h" />
     <ClInclude Include="UpgradeText.h" />
+    <ClInclude Include="GameOverScene.h" />
+    <ClInclude Include="GameOverText.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
