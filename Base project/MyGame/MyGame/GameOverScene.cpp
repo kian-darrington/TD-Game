@@ -2,7 +2,7 @@
 #include "GameOverText.h"
 #include "Enemy.h"
 
-GameOverScene::GameOverScene() {
-	GameOverTextPtr text = std::make_shared<GameOverText>();
+GameOverScene::GameOverScene(bool startScreen) {
+	GameOverTextPtr text = std::make_shared<GameOverText>(startScreen);
 	addGameObject(text);
 }

@@ -11,6 +11,7 @@ Enemy::Enemy(sf::Vector2f pos, int layer) {
 	assignTag("enemy");
 }
 
+// Assigns a sprite cover bases upon the layer, then changes layer to increase difficulty
 void Enemy::layerCheck() {
 	if (layer_ < 1) {
 		makeDead();
@@ -41,6 +42,7 @@ void Enemy::layerCheck() {
 	speedCheck();
 }
 
+// Makes enemies get slower as they lose layers
 void Enemy::speedCheck() {
 	speedBoost = 1.0f + ((float)layer_ / 8.0f);
 	if (totalLayers_ > 16) {
@@ -52,6 +54,7 @@ void Enemy::draw() {
 	GAME.getRenderWindow().draw(sprite_);
 }
 
+// Movement is done here
 void Enemy::update(sf::Time& elapsed) {
 	GameScene& scene = (GameScene&)GAME.getCurrentScene();
 	sf::Vector2f pos = sprite_.getPosition();
@@ -93,6 +96,7 @@ sf::Vector2f Enemy::getObjectPosition() {
 	return sf::Vector2f(sprite_.getPosition().x + sprite_.getGlobalBounds().width / 2, sprite_.getPosition().y + sprite_.getGlobalBounds().height / 2);
 }
 
+// Based upon the direction, the enemy will go right, left, up, or down
 void Enemy::handleCollision(GameObject& otherGameObject) {
 	collision = true;
 	if (otherGameObject.hasTag("right")) {

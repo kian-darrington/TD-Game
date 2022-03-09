@@ -3,7 +3,7 @@
 
 class GameOverScene : public Scene {
 public:
-	GameOverScene();
+	GameOverScene(bool startScreen);
 };
 
 typedef std::shared_ptr<GameOverScene> GameOverScenePtr;

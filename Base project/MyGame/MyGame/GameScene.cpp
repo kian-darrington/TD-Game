@@ -124,7 +124,7 @@ void GameScene::increaseDangerLevel() {
 void GameScene::decreaseLives(int layer) {
 	lives_ -= layer;
 	if (lives_ <= 0) {
-		GameOverScenePtr scene = std::make_shared<GameOverScene>();
+		GameOverScenePtr scene = std::make_shared<GameOverScene>(false);
 		GAME.setScene(scene);
 	}
 }
