@@ -6,7 +6,7 @@
 #include <sstream>
 #include "UpgradeText.h"
 #include "GameScene.h"
-
+// Makes tower
 Tower::Tower(sf::Vector2f pos, int towernum){
 	power_ = 1;
 	tower_.setTexture(GAME.getTexture("Resources/tower.png"));
@@ -30,7 +30,7 @@ void Tower::draw() {
 	GAME.getRenderWindow().draw(tower_);
 	GAME.getRenderWindow().draw(towerRange_);
 }
-
+// Handles what to do if it's clicked on, and fires at objects
 void Tower::update(sf::Time& elapsed) {
 	GameScene& scene = (GameScene&)GAME.getCurrentScene();
 	int msElapsed = elapsed.asMilliseconds();

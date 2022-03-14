@@ -5,7 +5,7 @@ const int WINDOW_WIDTH = 1200;
 const int WINDOW_HEIGHT = 700;
 
 const std::string WINDOW_TITLE = "Cookie Crush TD";
-
+// The main
 int main()
 {
 	// Seed the random number generator.

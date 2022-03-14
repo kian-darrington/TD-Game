@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string.h>
 
+// In game text for the user
 InGameText::InGameText() {
 	text_.setFont(GAME.getFont("Resources/Courneuf-Regular.ttf"));
 	text_.setPosition(sf::Vector2f(10.0f, 10.0f));

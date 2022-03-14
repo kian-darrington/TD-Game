@@ -1,5 +1,5 @@
 #include "Mouse.h"
-
+// Puts the mouse in the game as a game object
 Cursor::Cursor() {
 	sprite_.setTexture(GAME.getTexture("Resources/mouse.png"));
 	assignTag("mouse");

@@ -28,6 +28,7 @@ void EnemySpawner::update(sf::Time& elapsed) {
 		pos.x = -64;
 		pos.y = GAME.getRenderWindow().getSize().y / 2 - 15;
 		int enemyType = 1;
+		// Makes the game harder as it continues
 		switch (difficulty_) {
 		case 1:
 			enemyType = 1;

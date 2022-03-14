@@ -1,7 +1,7 @@
 #include "Projectile.h"
 
 const float BASE_SPEED = 0.5f;
-
+// Makes the projectile with the speeds of the direction it's supposeed to be going
 Projectile::Projectile(sf::Vector2f pos, sf::Vector2f ePos, float xSpeed, float ySpeed, int power) {
 	setCollisionCheckEnabled(true);
 	sprite_.setTexture(GAME.getTexture("Resources/spoon.png"));
@@ -26,7 +26,7 @@ Projectile::Projectile(sf::Vector2f pos, sf::Vector2f ePos, float xSpeed, float 
 void Projectile::draw() {
 	GAME.getRenderWindow().draw(sprite_);
 }
-
+// Makes the Projectile fly
 void Projectile::update(sf::Time& elapsed) {
 	int msElapsed = elapsed.asMilliseconds();
 	sf::Vector2f pos = sprite_.getPosition();

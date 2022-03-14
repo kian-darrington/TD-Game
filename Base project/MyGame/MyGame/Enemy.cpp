@@ -88,15 +88,15 @@ void Enemy::update(sf::Time& elapsed) {
 	}
 }
 
+// Returns values for the program to use
 sf::FloatRect Enemy::getCollisionRect() {
 	return sprite_.getGlobalBounds();
 }
-
 sf::Vector2f Enemy::getObjectPosition() {
 	return sf::Vector2f(sprite_.getPosition().x + sprite_.getGlobalBounds().width / 2, sprite_.getPosition().y + sprite_.getGlobalBounds().height / 2);
 }
 
-// Based upon the direction, the enemy will go right, left, up, or down
+// Based upon the direction, the enemy will go right, left, up, or down, also lets the enemy know when it's hit and makes it lose layers
 void Enemy::handleCollision(GameObject& otherGameObject) {
 	collision = true;
 	if (otherGameObject.hasTag("right")) {

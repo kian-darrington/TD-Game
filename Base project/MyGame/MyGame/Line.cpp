@@ -1,5 +1,5 @@
 #include "Line.h"
-
+// Different types of lines for helping the enemy move and keep the towers from being placed on the wrong spots
 Line::Line(int type, sf::Vector2f pos) {
 	if (type == 0) {
 		sprite_.setTexture(GAME.getTexture("Resources/visible-horizontal-line.png"));

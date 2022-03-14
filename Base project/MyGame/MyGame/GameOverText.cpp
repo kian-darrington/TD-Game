@@ -1,7 +1,7 @@
 #include "GameOverText.h"
 #include "GameScene.h"
 #include <sstream>
-
+//Text that is printed at the start of the game, and the death of the player
 GameOverText::GameOverText(bool startScreen) {
 	text_.setFont(GAME.getFont("Resources/Courneuf-Regular.ttf"));
 	text_.setPosition(sf::Vector2f(50.0f, 50.0f));

@@ -8,7 +8,7 @@
 #include "Mouse.h"
 
 const int vright = 0, vdown = 1, vleft = 2, vup = 3, right = 4, down = 5, left = 6, up = 7;
-
+// Scene for the main game
 GameScene::GameScene() {
 	setLevelOne();
 	EnemySpawnerPtr enemyspawner = std::make_shared<EnemySpawner>();
@@ -20,7 +20,7 @@ GameScene::GameScene() {
 	CursorPtr mouse = std::make_shared<Cursor>();
 	addGameObject(mouse);
 }
-
+// Sets the stage for the game
 void GameScene::setLevelOne() {
 	sf::Vector2f pos;
 	pos.x = 0;

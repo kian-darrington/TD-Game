@@ -1,6 +1,6 @@
 #include "TowerFootprint.h"
 #include <sstream>
-
+// This is the Footprint of the tower, it makes sure that the tower cannot be placed upon, also tells tower if it's clicked on
 TowerFoot::TowerFoot(sf::Vector2f pos, int tower) {
 	sprite_.setTexture(GAME.getTexture("Resources/tower.png"));
 	sprite_.setPosition(pos);
