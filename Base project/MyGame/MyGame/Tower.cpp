@@ -106,6 +106,9 @@ void Tower::update(sf::Time& elapsed) {
 			sf::Vector2f pos = tower_.getPosition();
 			towerRange_.setPosition(sf::Vector2f(pos.x - (towerRange_.getGlobalBounds().width / 2) + (tower_.getGlobalBounds().width / 2), pos.y - (towerRange_.getGlobalBounds().height / 2) + (tower_.getGlobalBounds().width / 2)));
 			attackDelay_ = attackDelay_ / 1.1f;
+			if (attackDelay_ < 10) {
+				attackDelay_ = 10;
+			}
 			scene.decreaseMoney((int)((5 + ((level_ - 1)* 15)) * (float)(1.0f + (float)((level_ - 2) / 10.0f))));
 			clickedOn_ = false;
 			upgradeOnce_ = false;
