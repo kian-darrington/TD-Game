@@ -32,7 +32,7 @@ void GameOverText::update(sf::Time& elapsed) {
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::I) && startScreen_) {
 		std::stringstream stream;
-		stream << "PRESS 'T' TO LAY DOWN TOWERS FOR 50 MONEY\nCLICK ON A TOWER TO SELECT IT\nPRESS SPACE WHILE SELECTING A TOWER\nTO UPGRADE\nPRESS BACKSPACE WHILE SELECTING A TOWER\nTO SELL IT\nPRESS 'R' TO SEE TOWER RANGES\n\n\nPRESS ENTER TO START";
+		stream << "PRESS 'T' TO LAY DOWN TOWERS FOR 50 MONEY\nCLICK ON A TOWER TO SELECT IT\nPRESS SPACE WHILE SELECTING A TOWER\nTO UPGRADE\nPRESS BACKSPACE WHILE SELECTING A TOWER\nTO SELL IT\n\n\nPRESS ENTER TO START";
 		text_.setString(stream.str());
 		startScreen_ = false;
 	}

@@ -6,6 +6,8 @@
 #include <sstream>
 #include "UpgradeText.h"
 #include "GameScene.h"
+
+const float RADIANS_TO_DEGREES = 57.2958f;
 // Makes tower
 Tower::Tower(sf::Vector2f pos, int towernum){
 	power_ = 1;
@@ -16,14 +18,13 @@ Tower::Tower(sf::Vector2f pos, int towernum){
 	std::stringstream name;
 	name << "tower" << towernum;
 	assignTag(name.str());
-	tower_.setPosition(pos);
+	tower_.setOrigin(tower_.getGlobalBounds().width / 2, tower_.getGlobalBounds().height / 2);
 	TowerFootPtr towerfoot = std::make_shared<TowerFoot>(pos, towernum);
 	GAME.getCurrentScene().addGameObject(towerfoot);
 	towerRange_.setPosition(sf::Vector2f(pos.x - (towerRange_.getGlobalBounds().width / 2) + (tower_.getGlobalBounds().width / 2), pos.y - (towerRange_.getGlobalBounds().height / 2) + (tower_.getGlobalBounds().width / 2)));
 	setCollisionCheckEnabled(true);
 	attackTimer_ = attackDelay_;
-	// tower_.setOrigin(sf::Vector2f(tower_.getGlobalBounds().width / 2,tower_.getGlobalBounds().height / 2));
-	// tower_.setPosition(pos);
+	tower_.setPosition(pos.x + tower_.getGlobalBounds().width / 2, pos.y + tower_.getGlobalBounds().height / 2);
 }
 
 void Tower::draw() {
@@ -35,7 +36,7 @@ void Tower::update(sf::Time& elapsed) {
 	GameScene& scene = (GameScene&)GAME.getCurrentScene();
 	int msElapsed = elapsed.asMilliseconds();
 	int whichone = 0;
-	float angleTotal = 0.0;
+	float angleTotal = 0.0f;
 	attackTimer_ -= msElapsed;
 	if (attack_ && attackTimer_ <= 0 && attackObject_.size() > 0) {
 		for (int i = 0; i < attackObject_.size(); i++) {
@@ -50,31 +51,30 @@ void Tower::update(sf::Time& elapsed) {
 				break;
 			}
 		}
-		sf::Vector2f towerCenter(tower_.getPosition().x + tower_.getGlobalBounds().width / 2, tower_.getPosition().y + tower_.getGlobalBounds().height / 2);
-		sf::Vector2f attackPoint = sf::Vector2f(towerCenter.x - attackObject_[whichone].x, towerCenter.y - attackObject_[whichone].y);
+		sf::Vector2f towerCenter(tower_.getPosition());
+		sf::Vector2f attackPoint(towerCenter.x - attackObject_[whichone].x, towerCenter.y - attackObject_[whichone].y);
 		ProjectilePtr projectile = std::make_shared<Projectile>(towerCenter, attackPoint, attackPoint.x, attackPoint.y, power_);
 		GAME.getCurrentScene().addGameObject(projectile);
-		if (attackPoint.x > 0 && attackPoint.y < 0) {
-			angleTotal += 90.0 * 0;
+		if (attackPoint.y > 0) {
+			if (attackPoint.x > 0) {
+				angleTotal += atan2f(-attackPoint.x, attackPoint.y) * RADIANS_TO_DEGREES;
+			}
+			else if (attackPoint.x < 0) {
+				angleTotal -= atan2f(attackPoint.y, -attackPoint.x) * RADIANS_TO_DEGREES;
+				angleTotal += 90;
+			}
 		}
-		else if (attackPoint.x < 0 && attackPoint.y < 0) {
-			angleTotal += 90* 0;
+		else if (attackPoint.y < 0) {
+			if (attackPoint.x > 0) {
+				angleTotal -= atan2f(attackPoint.x, attackPoint.y) * RADIANS_TO_DEGREES;
+			}
+			else if (attackPoint.x < 0) {
+				angleTotal -= atan2f(attackPoint.y, -attackPoint.x) * RADIANS_TO_DEGREES;
+				angleTotal += 90;
+			}
 		}
-		else if (attackPoint.x < 0 && attackPoint.y > 0) {
-			angleTotal += 90 * 0;
-		}
-		angleTotal += 180;
-		if (attackPoint.x != 0) {
-			angleTotal += atanf(attackPoint.y / attackPoint.x) * attackPoint.y;
-		}
-		else {
-			angleTotal += 90;
-		}
-		// tower_.setRotation(angleTotal);
+		tower_.setRotation(angleTotal);
 		attackTimer_ = attackDelay_;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
-		towerRange_.setColor(sf::Color::White);
 	}
 	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
 		towerRange_.setColor(sf::Color::Transparent);
@@ -104,7 +104,7 @@ void Tower::update(sf::Time& elapsed) {
 			moneySpent_ += (int)(((5 + ((level_ - 1) * 15))) * (float)(1.0f + (float)((level_ - 2) / 10.0f)));
 			towerRange_.setScale(1.0f + (float)((level_ - 1) / 10.0f), 1.0f + (float)(level_ - 1) / 10.0f);
 			sf::Vector2f pos = tower_.getPosition();
-			towerRange_.setPosition(sf::Vector2f(pos.x - (towerRange_.getGlobalBounds().width / 2) + (tower_.getGlobalBounds().width / 2), pos.y - (towerRange_.getGlobalBounds().height / 2) + (tower_.getGlobalBounds().width / 2)));
+			towerRange_.setPosition(sf::Vector2f(pos.x - towerRange_.getGlobalBounds().width / 2, pos.y - towerRange_.getGlobalBounds().height / 2));
 			attackDelay_ = attackDelay_ / 1.1f;
 			if (attackDelay_ < 10) {
 				attackDelay_ = 10;
