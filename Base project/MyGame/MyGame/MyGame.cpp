@@ -15,7 +15,7 @@ int main()
 	GAME.initialize(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
 
 	// Create our scene.
-	GameOverScenePtr scene = std::make_shared<GameOverScene>(true);
+	GameOverScenePtr scene = std::make_shared<GameOverScene>(true, 0);
 	GAME.setScene(scene);
 
 	// Run the game loop.

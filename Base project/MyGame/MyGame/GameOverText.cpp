@@ -1,8 +1,10 @@
 #include "GameOverText.h"
 #include "GameScene.h"
 #include <sstream>
+#include <string>
+#include <fstream>
 //Text that is printed at the start of the game, and the death of the player
-GameOverText::GameOverText(bool startScreen) {
+GameOverText::GameOverText(bool startScreen, int score) {
 	text_.setFont(GAME.getFont("Resources/Courneuf-Regular.ttf"));
 	text_.setPosition(sf::Vector2f(50.0f, 50.0f));
 	text_.setCharacterSize(48);
@@ -11,7 +13,21 @@ GameOverText::GameOverText(bool startScreen) {
 	if (!startScreen) {
 		text_.setFillColor(sf::Color::Red);
 		text_.setOutlineColor(sf::Color::Red);
-		stream << "YOU DIED!\n\nPRESS ENTER TO START AGAIN";
+		std::ifstream in;
+		in.open("Score.txt");
+		std::string temp;
+		int highscore = 0;
+		std::getline(in, temp);
+		highscore = std::stoi(temp);
+		in.close();
+		if (score > highscore) {
+			highscore = score;
+			std::ofstream out;
+			out.open("Score.txt");
+			out << score;
+			out.close();
+		}
+		stream << "YOU DIED!\n\nYOUR SCORE IS: " << score << "\n\nYOUR HIGH SCORE IS: " << highscore <<"\n\n\n\nPRESS ENTER TO START AGAIN";
 	}
 	else {
 		stream << "WELCOME TO COOKIE CRUSH TD\n\nPRESS 'I' FOR INSTRUCTIONS\n\nPRESS ENTER TO START";

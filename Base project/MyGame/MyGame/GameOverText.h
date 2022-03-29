@@ -3,7 +3,7 @@
 
 class GameOverText : public GameObject {
 public:
-	GameOverText(bool startScreen);
+	GameOverText(bool startScreen, int score);
 	void draw();
 	void update(sf::Time& elapsed);
 private:
