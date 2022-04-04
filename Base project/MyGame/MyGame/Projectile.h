@@ -3,7 +3,7 @@
 
 class Projectile : public GameObject {
 public:
-	Projectile(sf::Vector2f pos, sf::Vector2f ePos, float xSpeed, float ySpeed, int power);
+	Projectile(sf::Vector2f pos, sf::Vector2f ePos, float xSpeed, float ySpeed, int power, int rotation);
 	void draw();
 	void update(sf::Time& elapsed);
 	int getPower();

@@ -53,8 +53,6 @@ void Tower::update(sf::Time& elapsed) {
 		}
 		sf::Vector2f towerCenter(tower_.getPosition());
 		sf::Vector2f attackPoint(towerCenter.x - attackObject_[whichone].x, towerCenter.y - attackObject_[whichone].y);
-		ProjectilePtr projectile = std::make_shared<Projectile>(towerCenter, attackPoint, attackPoint.x, attackPoint.y, power_);
-		GAME.getCurrentScene().addGameObject(projectile);
 		if (attackPoint.y > 0) {
 			if (attackPoint.x > 0) {
 				angleTotal += atan2f(-attackPoint.x, attackPoint.y) * RADIANS_TO_DEGREES;
@@ -74,6 +72,8 @@ void Tower::update(sf::Time& elapsed) {
 			}
 		}
 		tower_.setRotation(angleTotal);
+		ProjectilePtr projectile = std::make_shared<Projectile>(towerCenter, attackPoint, attackPoint.x, attackPoint.y, power_, angleTotal);
+		GAME.getCurrentScene().addGameObject(projectile);
 		attackTimer_ = attackDelay_;
 	}
 	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
